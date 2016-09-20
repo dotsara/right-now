@@ -3,8 +3,6 @@ html {
 }
 
 body {
-  /*background: #1E2E47;
-  color: #256BD9;*/
   display: flex;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
@@ -19,7 +17,9 @@ section {
   text-align: left;
 }
 
-ol > li {
+ol > li,
+dl > dt,
+dl > dd {
   margin-bottom: .5rem;
 }
 
@@ -29,19 +29,36 @@ footer {
 
 .wrapper {
   margin: 0 auto;
+  text-align: center;
   width: 65%;
+}
+
+dl {
+  margin: 0 auto;
+  overflow: hidden;
+  width: 70%;
+}
+
+dl dt {
+  clear: left;
+  float: left;
+  width: 30%;
+}
+
+dl dd {
+  float: left;
 }
 
 /* media queries */
 @media (max-width: 900px) {
   html { font-size: 17px; }
-  .container {
+  .wrapper {
     width: 85%;
   }
 }
 @media (max-width: 400px) {
   html { font-size: 15px; }
-  .container {
+  .wrapper {
     width: 95%;
   }
 }

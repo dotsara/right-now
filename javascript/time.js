@@ -93,14 +93,34 @@ function formattedDatesWithLeadingZero(date) {
   return formatted_date;
 };
 
+// Getting the day # of the year taking leap years into account
+function isLeapYear(date) {
+  var year = date.getFullYear();
+  if((year & 3) != 0) return false;
+  return ((year % 100) != 0 || (year % 400) == 0);
+};
+
+function getDOY(date) {
+  var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
+  var mn = date.getMonth();
+  var dn = date.getDate();
+  var dayOfYear = dayCount[mn] + dn;
+  if(mn > 1 && isLeapYear(date)) dayOfYear++;
+  return dayOfYear;
+};
+
 $(document).ready(function() {
   console.log("Hiya! Let's do this thing.");
 
+  displayTime();
+  setInterval(displayTime, 1000);
+  
   // raw new Date
-  $('#moment .content').html(currently);
-  $('#fancy').html(formattedDatesWithLeadingZero(currently));
-  $('#month_of_the_year .content').html(monthOfTheYear(currently));
-  $('#day_of_the_month .content').html(currentlyDayOfMonth);
-  $('#day_of_the_week .content').html(currentlyDayOfWeek);
+  $('#moment').html(currently);
+  $('#date').html(formattedDatesWithLeadingZero(currently));
+  $('#month_of_the_year').html(monthOfTheYear(currently));
+  $('#day_of_the_month').html(currentlyDayOfMonth);
+  $('#day_of_the_week').html(currentlyDayOfWeek);
+  $('#day_of_the_year').html(getDOY(currently));
 });
 
