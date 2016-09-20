@@ -2,10 +2,10 @@
 
 var currently = new Date();
 
-var currentlyDayOfWeek = dayOfTheWeek(currently.getDay());
-var currentlyDayOfMonth = currently.getDate();
+var currentWeekday = whichWeekday(currently.getDay());
+var currentDayOfMonth = currently.getDate();
 
-function dayOfTheWeek(day) {
+function whichWeekday(day) {
   switch (day) {
       case 0:
           day = "Sunday";
@@ -32,7 +32,7 @@ function dayOfTheWeek(day) {
   return day;
 };
 
-function monthOfTheYear(month) {
+function whichMonth(month) {
   switch (month.getMonth()) {
       case 0:
           month = "January";
@@ -75,7 +75,7 @@ function monthOfTheYear(month) {
   return month;
 };
 
-function formattedDatesWithLeadingZero(date) {
+function formatDateWithLeadingZero(date) {
   var month = date.getMonth();
   var day = date.getDate();
 
@@ -89,7 +89,7 @@ function formattedDatesWithLeadingZero(date) {
     day = "0" + day;
   };
 
-  var formatted_date = month + "-" + day + "-" + date.getFullYear();
+  var formatted_date = month + "/" + day + "/" + date.getFullYear();
   return formatted_date;
 };
 
@@ -100,7 +100,7 @@ function isLeapYear(date) {
   return ((year % 100) != 0 || (year % 400) == 0);
 };
 
-function getDOY(date) {
+function getDayOfYear(date) {
   var dayCount = [0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334];
   var mn = date.getMonth();
   var dn = date.getDate();
@@ -109,18 +109,21 @@ function getDOY(date) {
   return dayOfYear;
 };
 
+function numberOfDaysInYear(date) {
+  if (isLeapYear(date)) {
+    return "366";
+  } else {
+    return "365";
+  };
+};
+
 $(document).ready(function() {
   console.log("Hiya! Let's do this thing.");
+  $('#year').attr("data-bg-text", currently.getFullYear());
 
-  displayTime();
-  setInterval(displayTime, 1000);
-  
-  // raw new Date
-  $('#moment').html(currently);
-  $('#date').html(formattedDatesWithLeadingZero(currently));
-  $('#month_of_the_year').html(monthOfTheYear(currently));
-  $('#day_of_the_month').html(currentlyDayOfMonth);
-  $('#day_of_the_week').html(currentlyDayOfWeek);
-  $('#day_of_the_year').html(getDOY(currently));
+  $('#month_day').html(whichMonth(currently) + " " + currentDayOfMonth);
+  $('#day_of_week').html(currentWeekday);
+  $('#us_formatted_date').html(formatDateWithLeadingZero(currently));
+  $('#day_of_year').html("#" + getDayOfYear(currently) + "/" + numberOfDaysInYear(currently));
+  $('#loaded_date span').html(currently);
 });
-

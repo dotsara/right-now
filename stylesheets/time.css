@@ -3,13 +3,15 @@ html {
 }
 
 body {
+  background: #28536C;
+  color: #6F8FA2;
   display: flex;
   font-family: 'Open Sans', sans-serif;
   text-align: center;
 }
 
 a:visited {
-  color: #909;
+  color: #A98B38;
 }
 
 header,
@@ -33,32 +35,65 @@ footer {
   width: 65%;
 }
 
-dl {
-  margin: 0 auto;
+#year {
   overflow: hidden;
-  width: 70%;
+  padding: 8rem 5rem;
+  position: relative;
 }
 
-dl dt {
-  clear: left;
-  float: left;
-  width: 30%;
+#year::after {
+  color: #477187;
+  content: attr(data-bg-text);
+  display: block;
+  font-size: 15rem;
+  line-height: 1;
+  opacity: .2;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 1;
 }
 
-dl dd {
-  float: left;
+#date_time {
+  font-size: 4rem;
+  margin-top: -16rem;
+}
+
+#date_time > p {
+  margin: 0 0 1rem;
+}
+
+#loaded_date {
+  font-size: 1rem;
+}
+
+#loaded_date span {
+  display: block;
 }
 
 /* media queries */
-@media (max-width: 900px) {
-  html { font-size: 17px; }
-  .wrapper {
-    width: 85%;
-  }
-}
 @media (max-width: 400px) {
   html { font-size: 15px; }
+  
+  body {
+    background: #802B66;
+    color: #40002D;
+  }
+
   .wrapper {
     width: 95%;
+  }
+
+  #year {
+    padding: 4rem 3rem;
+  }
+  #year::after {
+    color: #C180AD;
+    font-size: 8rem;
+  }
+
+  #date_time {
+    font-size: 3rem;
+    margin-top: -8rem;
   }
 }
